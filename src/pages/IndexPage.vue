@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { useAuthStore } from 'src/stores/authStore';
-import { ref } from 'vue';
 
 const authStore = useAuthStore();
 
-const user = ref(authStore.user);
+const { user } = storeToRefs(authStore);
 </script>

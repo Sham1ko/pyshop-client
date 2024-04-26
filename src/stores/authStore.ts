@@ -20,7 +20,6 @@ export const useAuthStore = defineStore({
   actions: {
     async login(email: string, password: string) {
       try {
-        console.log('Logging in with:', email, password);
         const response = await api.post('/auth/login', { email, password });
         const { user, token } = response.data;
         this.user = user;
@@ -35,10 +34,10 @@ export const useAuthStore = defineStore({
     async register(email: string, password: string) {
       try {
         const response = await api.post('/auth/register', { email, password });
-        console.log(response);
         return true;
       } catch (error) {
         console.error(error);
+        return false;
       }
     },
     logout() {

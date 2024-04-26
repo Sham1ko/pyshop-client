@@ -1,8 +1,18 @@
 <template lang="">
   <form @submit.prevent="handleSubmit" class="column content-center">
     <h2 class="form-title">Login</h2>
-    <input placeholder="Email" class="input-field" v-model="email" />
-    <input placeholder="Password" class="input-field" v-model="password" />
+    <input
+      placeholder="Email"
+      class="input-field"
+      type="email"
+      v-model="email"
+    />
+    <input
+      placeholder="Password"
+      type="password"
+      class="input-field"
+      v-model="password"
+    />
     <button type="submit" class="submit-btn">Login</button>
     <p class="sign-in-text">
       Don't have an account? <router-link to="/register">Register</router-link>

@@ -14,9 +14,9 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'http://localhost:3000/api' });
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
-const authApi = axios.create({ baseURL: 'http://localhost:3000/api' });
+const authApi = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
 authApi.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;

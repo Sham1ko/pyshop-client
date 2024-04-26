@@ -83,15 +83,12 @@
 </style>
 <script setup lang="ts">
 import { useAuthStore } from 'src/stores/authStore';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { Notify } from 'quasar';
+import { storeToRefs } from 'pinia';
 
 const authStore = useAuthStore();
-const user = ref(authStore.user);
-
-watch(authStore.user, () => {
-  user.value = authStore.user;
-});
+const { user } = storeToRefs(authStore);
 
 const showDeleteDialog = ref(false);
 

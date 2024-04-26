@@ -1,8 +1,18 @@
 <template lang="">
   <form @submit.prevent="handleSubmit" class="column content-center">
     <h2 class="form-title">Register</h2>
-    <input placeholder="Email" class="input-field" v-model="email" />
-    <input placeholder="Password" class="input-field" v-model="password" />
+    <input
+      type="email"
+      placeholder="Email"
+      class="input-field"
+      v-model="email"
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      class="input-field"
+      v-model="password"
+    />
     <button type="submit" class="submit-btn">Register</button>
     <p class="sign-in-text">
       Already registered? <router-link to="/login">Sign In</router-link>
@@ -11,8 +21,12 @@
 </template>
 
 <script setup lang="ts">
+import { Notify } from 'quasar';
 import { useAuthStore } from 'src/stores/authStore';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const registrationStore = useAuthStore();
 
@@ -20,9 +34,20 @@ const email = ref('');
 const password = ref('');
 
 function handleSubmit() {
-  console.log('Email:', email.value);
-  console.log('Password:', password.value);
-  registrationStore.register(email.value, password.value);
+  registrationStore.register(email.value, password.value).then((response) => {
+    if (response) {
+      Notify.create({
+        message: 'Registration successful',
+        color: 'positive',
+      });
+      router.push('/profile');
+    } else {
+      Notify.create({
+        message: 'Registration failed',
+        color: 'negative',
+      });
+    }
+  });
 }
 </script>
 
